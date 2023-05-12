@@ -6,6 +6,7 @@ import { useState } from "react";
 import CloseIcon from '@mui/icons-material/Close';
 import { nanoid } from 'nanoid';
 import EditIcon from '@mui/icons-material/Edit';
+import { Link } from 'react-router-dom';
 
 
 export default function AddACard() {
@@ -18,7 +19,7 @@ export default function AddACard() {
   const handleAddCard = () => {
     // console.log('Adding New Card', cardText);
     const newCard = {
-      id: nanoid(), 
+      id: nanoid(5), 
       text: cardText
     };
     setCards(prevCards => [...prevCards, newCard]); 
@@ -44,7 +45,7 @@ export default function AddACard() {
      <div className={style.cards}>
         {cards.map((card) => (
           <div key={card.id} className={style.card} >
-           <p >  {card.text} </p>
+           <p > <Link to={"/task/"+card.id}>{card.text}</Link>   </p>
            <span> <EditIcon sx={{fontSize:'20px'}}/></span>
           </div>
         ))}
