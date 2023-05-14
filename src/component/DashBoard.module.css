@@ -27,6 +27,9 @@
     display: flex;
 
 }
+.dash_containor::-webkit-scrollbar{
+    display: none;
+}
 .addbtn{
     /* border: 2px red solid !important; */
     min-width: 15vw !important;

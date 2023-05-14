@@ -3,7 +3,8 @@ import DashBoard from './component/DashBoard'
 import { Provider } from 'react-redux'
 import store from './store/store'
 import { Route, Routes } from 'react-router'
-import Description from './component/description/Description'
+// import Description from './component/description/Description'
+import DialogBox from './component/dialogBox/DialogBox'
 
 function App() {
  
@@ -13,7 +14,7 @@ function App() {
     <Provider store={store}>
       <Routes>
        <Route path='/' element={<DashBoard/>} />
-       <Route path='/task/:id/' element={<Description/>} />
+       <Route path='/task/:id/' element={<DialogBox/>} />
         
       </Routes>
       </Provider>
