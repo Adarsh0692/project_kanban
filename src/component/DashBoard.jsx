@@ -7,36 +7,43 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Navbar from "./header/Navbar";
 import AddNew from "./AddNew";
 import Card from "./AddACard/Card";
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 export default function DashBoard() {
-  const [isHover, setIsHover] = useState(false)
+  const [isHover, setIsHover] = useState(true)
   const list = useSelector((state) => state.ListSlice.list);
 
   const dispatch = useDispatch();
 
-  function handleListDelete(listId) {
-    dispatch(deleteList(listId));
+  function handleListDelete(item) {
+    dispatch(deleteList(item.id));
+    toast.success(`List ${item.title} Deleted successfully.`);
     
   }
 
   function handleDeleteTask(task){
+    const listName = list.filter((item) => item.id === task.listId)
      dispatch(deleteTask(task))
+     toast.success(`Task ${task.title} from list ${listName[0].title} Deleted successfully.`);
   }
 
   return (
     <div className={style.dash_div}>
       <Navbar />
-      {/* <h1> New DashBoard</h1> */}
-
+     
+      <ToastContainer position="top-center" autoClose='2000' />
       <div className={style.dash_containor}>
         <div className={style.list_container}>
           {list.map((item) => (
             <div key={item.id} className={style.cardBox}>
               <div className={style.list_card}>
-                <div className={style.listName} onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
+                <div className={style.listName} 
+                // onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}
+                >
 
                   <span>{item.title}</span>
-                {isHover && <span onClick={() => handleListDelete(item.id)}>
+                {isHover && <span onClick={() => handleListDelete(item)}>
                   <DeleteIcon sx={{fontSize:'20px', cursor:'pointer'}} />
                 </span>}
                 </div>

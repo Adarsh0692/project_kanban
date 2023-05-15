@@ -84,7 +84,7 @@
     font-size: 25px;
 }
 .listName{
-   /* cursor: pointer; */
+   cursor: pointer;
     height: 2rem;
     display: flex;
     align-items: center;
@@ -112,3 +112,9 @@
   /* .card span{
     margin-left: 50px;
   } */
+.listName p{
+    color: aliceblue;
+}
+.listName p:hover{
+    color: rgb(157, 16, 16);
+}

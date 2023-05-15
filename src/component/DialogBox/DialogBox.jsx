@@ -30,7 +30,7 @@ function DialogBox() {
     const [open, setOpen] = React.useState(true);
     const location = useLocation()
    const navigate = useNavigate()
-   const list = useSelector((state) => state.ListSlice.list) || []
+   const list = useSelector((state) => state.ListSlice.list)
    const listName = list.find((item) => item.id === location.state.card.listId)
 //    console.log(listName.title);
     const handleClose = () => {
