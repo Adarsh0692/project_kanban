@@ -4,7 +4,7 @@ const ListSlice = createSlice({
     name: 'ListSlice',
     initialState: {
         list:[],
-        // task: [],
+        
     },
     reducers: {
       addList (state, action) {
@@ -21,17 +21,29 @@ const ListSlice = createSlice({
             if(item.id === action.payload.listId){
                 if(Object.hasOwn(item, 'task')){
                     item.task.push(action.payload)
+                   let arr = []
                 }else{
                     item.task =[];
                     item.task.push(action.payload)
                 }
             }
         })
-    }
+    },
+    deleteTask: (state, action) => {
+        // console.log(action.payload);
+        state.list.forEach((item) => {
+            if(item.id === action.payload.listId){
+                // console.log(item)
+               item.task = item.task.filter((task) => task.id !== action.payload.id)
+            }
+        })
+
+    },
+
 
 }
 
 })
 
-export const {addList,deleteList,addTask} = ListSlice.actions;
+export const {addList,deleteList,addTask,deleteTask} = ListSlice.actions;
 export default ListSlice.reducer

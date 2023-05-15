@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { deleteList } from "../store/ListSlice";
+import { deleteList, deleteTask } from "../store/ListSlice";
 import { useDispatch, useSelector } from "react-redux";
 import EditIcon from '@mui/icons-material/Edit';
 import style from "./DashBoard.module.css";
@@ -16,7 +16,11 @@ export default function DashBoard() {
 
   function handleListDelete(listId) {
     dispatch(deleteList(listId));
-    setAnchorEl(null);
+    
+  }
+
+  function handleDeleteTask(task){
+     dispatch(deleteTask(task))
   }
 
   return (
@@ -41,8 +45,8 @@ export default function DashBoard() {
                     item.task.map((task) => (
                       <div key={task.id} className={style.card} >
                         <Card cardData={task} />
-                        <span> <EditIcon sx={{fontSize:'15px',cursor:'pointer'}}/></span>
-                        <p><DeleteIcon sx={{fontSize:'15px', cursor:'pointer'}} /></p>
+                        {/* <span> <EditIcon sx={{fontSize:'15px',cursor:'pointer'}}/></span> */}
+                       <p><DeleteIcon sx={{fontSize:'15px', cursor:'pointer'}} onClick={()=>handleDeleteTask(task)}/></p>
                       </div>
                     ))}
                 </div>
