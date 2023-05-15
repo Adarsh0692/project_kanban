@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { deleteList } from "../store/ListSlice";
 import { useDispatch, useSelector } from "react-redux";
 import EditIcon from '@mui/icons-material/Edit';
@@ -9,6 +9,7 @@ import AddNew from "./AddNew";
 import Card from "./AddACard/Card";
 
 export default function DashBoard() {
+  const [isHover, setIsHover] = useState(false)
   const list = useSelector((state) => state.ListSlice.list);
 
   const dispatch = useDispatch();
@@ -28,18 +29,20 @@ export default function DashBoard() {
           {list.map((item) => (
             <div key={item.id} className={style.cardBox}>
               <div className={style.list_card}>
-                <div className={style.listName}>
+                <div className={style.listName} onMouseEnter={() => setIsHover(true)} onMouseLeave={() => setIsHover(false)}>
+
                   <span>{item.title}</span>
-                  <span onClick={() => handleListDelete(item.id)}>
-                    <DeleteIcon />
-                  </span>
+                {isHover && <span onClick={() => handleListDelete(item.id)}>
+                  <DeleteIcon sx={{fontSize:'20px', cursor:'pointer'}} />
+                </span>}
                 </div>
                 <div>
                   {item.task &&
                     item.task.map((task) => (
-                      <div key={task.id} className={style.card}>
+                      <div key={task.id} className={style.card} >
                         <Card cardData={task} />
-                        <span> <EditIcon sx={{fontSize:'20px'}}/></span>
+                        <span> <EditIcon sx={{fontSize:'15px',cursor:'pointer'}}/></span>
+                        <p><DeleteIcon sx={{fontSize:'15px', cursor:'pointer'}} /></p>
                       </div>
                     ))}
                 </div>

@@ -23,3 +23,13 @@
 .p{
     padding-left: 2.8rem;
 }
+
+.cross{
+    position: absolute !important;
+    right: 20px !important;
+    margin-right: auto !important;
+    /* border: 2px red solid !important; */
+    display: flex;
+    align-items: center;
+    background: round;
+}

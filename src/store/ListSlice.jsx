@@ -16,7 +16,7 @@ const ListSlice = createSlice({
         // console.log("delete",action.payload);
     },
     addTask (state, action) {
-        console.log('action=> ', action);
+        // console.log('action=> ', action);
         state.list.forEach((item) => {
             if(item.id === action.payload.listId){
                 if(Object.hasOwn(item, 'task')){

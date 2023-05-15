@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import { useSelector } from 'react-redux'
 
 const styles = {
   position: 'absolute',
@@ -29,11 +30,14 @@ function DialogBox() {
     const [open, setOpen] = React.useState(true);
     const location = useLocation()
    const navigate = useNavigate()
-    // const handleOpen = () => setOpen(true);
+   const list = useSelector((state) => state.ListSlice.list) || []
+   const listName = list.find((item) => item.id === location.state.card.listId)
+//    console.log(listName.title);
     const handleClose = () => {
       setOpen(false)
       navigate('/')
     };
+    // console.log(location);
   return (
     <div className={style.mainContainer}>
      
@@ -46,7 +50,7 @@ function DialogBox() {
         <Box sx={styles}>
           <Typography id="modal-modal-description" sx={{ mt: 0 }}>
          <div>
-         <Title title ={location.state.task}/>
+         <Title title ={location.state.card.title} listName={listName.title}/>
          </div>
      <div className={style.decription}>
      <Description/>

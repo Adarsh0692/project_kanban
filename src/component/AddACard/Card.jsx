@@ -8,7 +8,7 @@ export default function Card({cardData}) {
    
     const navigate = useNavigate()
     function handleNavigate(card){
-        navigate('/task/'+card.id +'-'+card.title ,{state:{task: card.title}})
+        navigate('/task/'+card.id +'-'+card.title ,{state:{card}})
         
   }
  
