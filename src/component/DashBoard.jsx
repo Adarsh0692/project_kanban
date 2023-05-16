@@ -9,9 +9,12 @@ import AddNew from "./AddNew";
 import Card from "./AddACard/Card";
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import { DragDropContext, Draggable,Droppable } from "react-beautiful-dnd";
+
 
 export default function DashBoard() {
   const [isHover, setIsHover] = useState(true)
+  const [items , setItems] = useState([])
   const list = useSelector((state) => state.ListSlice.list);
 
   const dispatch = useDispatch();
@@ -28,11 +31,23 @@ export default function DashBoard() {
      toast.success(`Task ${task.title} from list ${listName[0].title} Deleted successfully.`);
   }
 
+  const onDragEnd = (result) => {
+    if(!result.destination){
+      return;
+    }
+    const reorderedItems = reorder(
+      items,
+      result.source.index,
+      result.destination.index
+    );
+    console.log(reorder)
+  }
+
   return (
     <div className={style.dash_div}>
       <Navbar />
-     
       <ToastContainer position="top-center" autoClose='2000' />
+     <DragDropContext onDragEnd={onDragEnd}>
       <div className={style.dash_containor}>
         <div className={style.list_container}>
           {list.map((item) => (
@@ -68,6 +83,7 @@ export default function DashBoard() {
 
         <AddNew />
       </div>
+      </DragDropContext>
     </div>
   );
 }

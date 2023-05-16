@@ -19,7 +19,7 @@ export default function AddNew({type, listId}) {
 
   function handleAddList(e) {
     e.preventDefault();
-    if(type){
+    if(type && input){
           dispatch(addTask({id: nanoid(7), title: input, listId: listId}))
     }else
     if(input){
